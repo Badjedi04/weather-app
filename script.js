@@ -1,7 +1,7 @@
-const apiKey = "1d0d7c16f7eb396a653d359fea36b92f"; // Replace with your actual API key
+const apiKey = "1d0d7c16f7eb396a653d359fea36b92f"; // Replace with your API key
 
 function getWeather() {
-    const city = document.getElementById("cityInput").value.trim();
+    const city = document.getElementById("cityInput").value;
     if (city === "") {
         alert("Please enter a city name.");
         return;
@@ -13,22 +13,16 @@ function getWeather() {
         .then(response => response.json())
         .then(data => {
             if (data.cod === "404") {
-                document.getElementById("weatherResult").innerHTML = "<p>City not found! Try again.</p>";
+                document.getElementById("weatherResult").innerHTML = "City not found!";
                 return;
             }
 
-            const { name, sys, main, weather, wind } = data;
-            const sunriseTime = new Date(sys.sunrise * 1000).toLocaleTimeString();
-            const sunsetTime = new Date(sys.sunset * 1000).toLocaleTimeString();
-
             const weatherHTML = `
-                <h2>${name}, ${sys.country}</h2>
-                <p><strong>Temperature:</strong> ${main.temp}°C (Feels like ${main.feels_like}°C)</p>
-                <p><strong>Humidity:</strong> ${main.humidity}%</p>
-                <p><strong>Wind Speed:</strong> ${wind.speed} m/s</p>
-                <p><strong>Weather:</strong> ${weather[0].description}</p>
-                <img src="https://openweathermap.org/img/wn/${weather[0].icon}@2x.png" alt="Weather Icon">
-                <p><strong>Sunrise:</strong> ${sunriseTime} | <strong>Sunset:</strong> ${sunsetTime}</p>
+                <h2>${data.name}, ${data.sys.country}</h2>
+                <p>Temperature: ${data.main.temp}°C</p>
+                <p>Humidity: ${data.main.humidity}%</p>
+                <p>Weather: ${data.weather[0].description}</p>
+                <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" alt="Weather Icon">
             `;
             document.getElementById("weatherResult").innerHTML = weatherHTML;
         })
