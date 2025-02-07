@@ -8,16 +8,14 @@
 </head>
 <body>
 
-    <div class="container">
-        <h1>Weather App</h1>
-        <div class="search-box">
-            <input type="text" id="cityInput" placeholder="Enter city name..." oninput="fetchCitySuggestions()">
-            <button onclick="getWeather()">Get Weather</button>
-            <ul id="suggestions"></ul>
-        </div>
-
-        <div id="weatherResult"></div>
+    <h1>Weather App</h1>
+    <div class="search-container">
+        <input type="text" id="cityInput" placeholder="Enter city name..." oninput="fetchCitySuggestions()">
+        <button onclick="getWeather()">Get Weather</button>
+        <ul id="suggestions"></ul>
     </div>
+
+    <div id="weatherResult"></div>
 
     <script src="script.js"></script>
 </body>
